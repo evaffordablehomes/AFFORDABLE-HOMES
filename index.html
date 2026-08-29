@@ -177,8 +177,8 @@
 <script>
     var form = document.getElementById('rentalForm');
     
-    form.addEventListener('submit', function() {
-        // 1. Point the form to target our secret invisible iframe to bypass network blocks
+    form.addEventListener('submit', function(e) {
+        // 1. Let the native HTML form handle the submission data path
         form.action = "https://web3forms.com";
         form.target = "hidden_iframe";
         
@@ -193,11 +193,12 @@
         document.getElementById('ticket-number').textContent = "APP-" + randomNum;
         document.getElementById('visitor-name').textContent = firstNameValue;
 
-        // 4. Give the server 1.5 seconds to accept data, then swap panels natively!
+        // 4. Give the server 2 seconds to accept data, then swap panels natively!
         setTimeout(function() {
             document.getElementById('formWindow').style.display = "none";
             document.getElementById('successWindow').style.display = "block";
             window.scrollTo(0, 0);
-        }, 1500);
+        }, 2000);
     });
 </script>
+
