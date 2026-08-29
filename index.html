@@ -6,7 +6,8 @@
     <title>Rental Application Form</title>
     <style>
         body { font-family: Arial, sans-serif; background-color: #4a3b32; margin: 0; padding: 40px 20px; }
-        .form-container { max-width: 650px; margin: 0 auto; background: #ffffff; padding: 30px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
+        .form-container, .success-container { max-width: 650px; margin: 0 auto; background: #ffffff; padding: 30px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
+        .success-container { display: none; text-align: center; max-width: 500px; }
         .logo-container { text-align: center; margin-bottom: 15px; }
         .logo-container img { max-width: 180px; height: auto; }
         .email-display { text-align: center; color: #666; font-size: 14px; margin-bottom: 25px; }
@@ -20,31 +21,30 @@
         label { display: block; margin-bottom: 5px; font-weight: bold; color: #555; font-size: 14px; }
         input, textarea, select { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; font-size: 14px; }
         input:focus, textarea:focus, select:focus { border-color: #4a3b32; outline: none; }
-        button { background-color: #4a3b32; color: white; padding: 12px 20px; border: none; border-radius: 4px; cursor: pointer; width: 100%; font-size: 16px; font-weight: bold; margin-top: 20px; transition: background 0.2s; }
-        button:hover { background-color: #362a24; }
+        button, .btn-back { background-color: #4a3b32; color: white; padding: 12px 20px; border: none; border-radius: 4px; cursor: pointer; width: 100%; font-size: 16px; font-weight: bold; margin-top: 20px; transition: background 0.2s; text-decoration: none; display: block; text-align: center; box-sizing: border-box; }
+        button:hover, .btn-back:hover { background-color: #362a24; }
+        p { color: #666; font-size: 16px; line-height: 1.6; margin: 10px 0; }
+        .ticket-box { background: #f4f4f9; border-left: 5px solid #4a3b32; padding: 15px; margin: 25px 0; border-radius: 4px; font-weight: bold; color: #4a3b32; font-size: 18px; }
+        .important-note { color: #b82323; font-weight: bold; font-size: 14px; margin-top: 15px; }
         @media (max-width: 600px) { .form-grid { grid-template-columns: 1fr; } .full-width { grid-column: span 1; } }
     </style>
 </head>
 <body>
 
-<div class="form-container">
-    
+<!-- FORM WINDOW SECTION -->
+<div class="form-container" id="formWindow">
     <div class="logo-container">
         <img src="logo.jpeg" alt="Company Logo">
     </div>
-
     <div class="email-display">
         Questions? Contact us at: <a href="mailto:evaffordablehomes@gmail.com">evaffordablehomes@gmail.com</a>
     </div>
-
     <h2>Rental Application Form</h2>
     
     <form id="rentalForm">
-        
         <input type="hidden" name="access_key" value="4873d067-f38f-4610-97b0-c6c1c51054a5">
         <input type="hidden" name="subject" value="New Rental Application Submitted!">
 
-        <!-- SECTION 1: PERSONAL INFORMATION -->
         <h3>1. Personal Information</h3>
         <div class="form-grid">
             <div class="form-group">
@@ -73,7 +73,6 @@
             </div>
         </div>
 
-        <!-- SECTION 2: DESIRED RENTAL LOCATION & PREFERENCES -->
         <h3>2. Desired Location & Preferences</h3>
         <div class="form-grid">
             <div class="form-group">
@@ -95,10 +94,9 @@
             </div>
         </div>
 
-        <!-- SECTION 3: EMPLOYMENT & INCOME -->
         <h3>3. Employment & Income</h3>
         <div class="form-grid">
-            <div class="form-group full-width">
+            <div class="full-width form-group">
                 <label for="employer">Current Employer Name</label>
                 <input type="text" id="employer" name="Employer" required>
             </div>
@@ -112,10 +110,9 @@
             </div>
         </div>
 
-        <!-- SECTION 4: RENTAL HISTORY -->
         <h3>4. Rental History</h3>
         <div class="form-grid">
-            <div class="form-group full-width">
+            <div class="full-width form-group">
                 <label for="current_address">Current Residential Address</label>
                 <input type="text" id="current_address" name="Current Address" required>
             </div>
@@ -129,7 +126,6 @@
             </div>
         </div>
 
-        <!-- SECTION 5: ADDITIONAL DETAILS -->
         <h3>5. Additional Details</h3>
         <div class="form-grid">
             <div class="form-group">
@@ -146,27 +142,50 @@
                     <option value="Yes">Yes</option>
                 </select>
             </div>
-            <div class="form-group full-width">
+            <div class="full-width form-group">
                 <label for="additional_notes">Additional Comments / Notes</label>
                 <textarea id="additional_notes" name="Additional Notes" rows="4" placeholder="Any details you want to add..."></textarea>
             </div>
         </div>
 
-        <button type="submit">Submit Rental Application</button>
+        <button type="submit" id="submitBtn">Submit Rental Application</button>
     </form>
 </div>
 
-<script>
-    const form = document.getElementById('rentalForm');
+<!-- THANK YOU WINDOW SECTION -->
+<div class="success-container" id="successWindow">
+    <div class="logo-container">
+        <img src="logo.jpeg" alt="Company Logo">
+    </div>
+    <h2>Application Received!</h2>
+    <p>Thank you, <span id="visitor-name" style="font-weight: bold; color: #333;">Applicant</span>!</p>
+    <p>We will get back with you shortly. Please make sure to check your email inbox.</p>
     
-    form.addEventListener('submit', function(e) {
-        e.preventDefault(); 
+    <div class="ticket-box">
+        Your Ticket Number: <span id="ticket-number">------</span>
+    </div>
+
+    <p class="important-note">⚠️ Note: If you don't see our confirmation reply soon, please remember to check your junk or spam folder!</p>
+    <a href="index.html" class="btn-back">Return to Form</a>
+</div>
+
+<!-- JAVASCRIPT BLOCK -->
+<script>
+    // Universal submission script formatted safely for text editors
+    document.getElementById('rentalForm').addEventListener('submit', function(event) {
+        event.preventDefault();
         
-        const formData = new FormData(form);
-        const object = Object.fromEntries(formData);
-        const json = JSON.stringify(object);
-        
-        const applicantName = encodeURIComponent(document.getElementById('first_name').value);
+        var submitButton = document.getElementById('submitBtn');
+        submitButton.innerText = "Sending Application...";
+        submitButton.disabled = true;
+
+        var formData = new FormData(this);
+        var formObject = {};
+        formData.forEach(function(value, key) {
+            formObject[key] = value;
+        });
+
+        var firstNameValue = document.getElementById('first_name').value;
 
         fetch('https://web3forms.com', {
             method: 'POST',
@@ -174,22 +193,27 @@
                 'Content-Type': 'application/json',
                 'Accept': 'application/json'
             },
-            body: json
+            body: JSON.stringify(formObject)
         })
-        .then(async (response) => {
-            if (response.status == 200) {
-                // FIXED SAFARI DIRECT REDIRECT LINK
-                window.location.href = `success.html?name=${applicantName}`;
+        .then(function(response) {
+            if (response.ok) {
+                // YOUR TICKET CODE LIVES SAFELY HERE
+                var randomNum = Math.floor(100000 + Math.random() * 900000);
+                document.getElementById('ticket-number').textContent = "APP-" + randomNum;
+                document.getElementById('visitor-name').textContent = firstNameValue;
+                document.getElementById('formWindow').style.display = "none";
+                document.getElementById('successWindow').style.display = "block";
+                window.scrollTo(0, 0);
             } else {
                 alert("Something went wrong. Please try again.");
+                submitButton.innerText = "Submit Rental Application";
+                submitButton.disabled = false;
             }
         })
-        .catch(error => {
-            console.log(error);
+        .catch(function(error) {
             alert("Network connection error. Try submitting again.");
+            submitButton.innerText = "Submit Rental Application";
+            submitButton.disabled = false;
         });
     });
 </script>
-
-</body>
-</html>
