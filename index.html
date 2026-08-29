@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rental Application Form</title>
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #4a3b32; margin: 0; padding: 40px 20px; }
+        .form-container { max-width: 650px; margin: 0 auto; background: #ffffff; padding: 30px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
+        .logo-container { text-align: center; margin-bottom: 15px; }
+        .logo-container img { max-width: 180px; height: auto; }
+        
+        /* Visible email styling */
+        .email-display { text-align: center; color: #666; font-size: 14px; margin-bottom: 25px; }
+        .email-display a { color: #4a3b32; font-weight: bold; text-decoration: none; }
+        .email-display a:hover { text-decoration: underline; }
+
+        h2 { text-align: center; color: #333333; margin-bottom: 30px; border-bottom: 2px solid #4a3b32; padding-bottom: 10px; }
+        h3 { color: #4a3b32; margin-top: 25px; border-bottom: 1px solid #ddd; padding-bottom: 5px; }
+        .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+        .full-width { grid-column: span 2; }
+        .form-group { margin-bottom: 15px; }
+        label { display: block; margin-bottom: 5px; font-weight: bold; color: #555; font-size: 14px; }
+        input, textarea, select { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; font-size: 14px; }
+        input:focus, textarea:focus, select:focus { border-color: #4a3b32; outline: none; }
+        button { background-color: #4a3b32; color: white; padding: 12px 20px; border: none; border-radius: 4px; cursor: pointer; width: 100%; font-size: 16px; font-weight: bold; margin-top: 20px; transition: background 0.2s; }
+        button:hover { background-color: #362a24; }
+        @media (max-width: 600px) { .form-grid { grid-template-columns: 1fr; } .full-width { grid-column: span 1; } }
+    </style>
+</head>
+<body>
+
+<div class="form-container">
+    
+    <!-- Your logo sitting locally in your folder -->
+    <div class="logo-container">
+        <img src="logo.jpeg" alt="Company Logo">
+    </div>
+
+    <!-- THIS MAKES YOUR NEW EMAIL VISIBLE ON THE PAGE -->
+    <div class="email-display">
+        Questions? Contact us at: <a href="mailto:evaffordablehomes@gmail.com">evaffordablehomes@gmail.com</a>
+    </div>
+
+    <h2>Rental Application Form</h2>
+    
+    <!-- Form submission backend pointing to your new email -->
+    <form action="https://formsubmit.co" method="POST">
+        
+        <!-- FormSubmit Settings -->
+        <input type="hidden" name="_captcha" value="false">
+        <input type="hidden" name="_subject" value="New Rental Application Submitted!">
+        
+        <!-- Your custom thank you page link -->
+        <input type="hidden" name="_next" value="https://github.io">
+
+        <!-- SECTION 1: PERSONAL INFORMATION -->
+        <h3>1. Personal Information</h3>
+        <div class="form-grid">
+            <div class="form-group">
+                <label for="first_name">First Name</label>
+                <input type="text" id="first_name" name="name" required>
+            </div>
+            <div class="form-group">
+                <label for="last_name">Last Name</label>
+                <input type="text" id="last_name" name="Last Name" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" name="Email" required>
+            </div>
+            <div class="form-group">
+                <label for="phone">Phone Number</label>
+                <input type="tel" id="phone" name="Phone" required>
+            </div>
+            <div class="form-group">
+                <label for="dob">Date of Birth</label>
+                <input type="date" id="dob" name="Date of Birth" required>
+            </div>
+            <div class="form-group">
+                <label for="move_in_date">Desired Move-in Date</label>
+                <input type="date" id="move_in_date" name="Desired Move-in Date" required>
+            </div>
+        </div>
+
+        <!-- SECTION 2: DESIRED RENTAL LOCATION & PREFERENCES -->
+        <h3>2. Desired Location & Preferences</h3>
+        <div class="form-grid">
+            <div class="form-group">
+                <label for="desired_state">Desired State</label>
+                <input type="text" id="desired_state" name="Desired State" placeholder="e.g. New York" required>
+            </div>
+            <div class="form-group">
+                <label for="desired_zip">Desired Zip Code</label>
+                <input type="text" id="desired_zip" name="Desired Zip Code" placeholder="e.g. 10001" required>
+            </div>
+            <div class="form-group full-width">
+                <label for="security_deposit">Are you ready to make your security deposit?</label>
+                <select id="security_deposit" name="Ready for Security Deposit" required>
+                    <option value="" disabled selected>Select an option</option>
+                    <option value="Yes, I am ready to pay immediately">Yes, I am ready to pay immediately</option>
+                    <option value="Yes, upon application approval">Yes, upon application approval</option>
+                    <option value="No, I need more time">No, I need more time</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- SECTION 3: EMPLOYMENT & INCOME -->
+        <h3>3. Employment & Income</h3>
+        <div class="form-grid">
+            <div class="form-group full-width">
+                <label for="employer">Current Employer Name</label>
+                <input type="text" id="employer" name="Employer" required>
+            </div>
+            <div class="form-group">
+                <label for="job_title">Job Title</label>
+                <input type="text" id="job_title" name="Job Title" required>
+            </div>
+            <div class="form-group">
+                <label for="income">Monthly Gross Income ($)</label>
+                <input type="number" id="income" name="Monthly Income" placeholder="e.g. 3500" required>
+            </div>
+        </div>
+
+        <!-- SECTION 4: RENTAL HISTORY -->
+        <h3>4. Rental History</h3>
+        <div class="form-grid">
+            <div class="form-group full-width">
+                <label for="current_address">Current Residential Address</label>
+                <input type="text" id="current_address" name="Current Address" required>
+            </div>
+            <div class="form-group">
+                <label for="landlord_name">Current Landlord Name</label>
+                <input type="text" id="landlord_name" name="Landlord Name">
+            </div>
+            <div class="form-group">
+                <label for="landlord_phone">Landlord Phone Number</label>
+                <input type="tel" id="landlord_phone" name="Landlord Phone">
+            </div>
+        </div>
+
+        <!-- SECTION 5: ADDITIONAL DETAILS -->
+        <h3>5. Additional Details</h3>
+        <div class="form-grid">
+            <div class="form-group">
+                <label for="pets">Do you have any pets?</label>
+                <select id="pets" name="Has Pets" required>
+                    <option value="No">No</option>
+                    <option value="Yes">Yes</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="smoker">Do you smoke?</label>
+                <select id="smoker" name="Smoker" required>
+                    <option value="No">No</option>
+                    <option value="Yes">Yes</option>
+                </select>
+            </div>
+            <div class="form-group full-width">
+                <label for="additional_notes">Additional Comments / Notes</label>
+                <textarea id="additional_notes" name="Additional Notes" rows="4" placeholder="Any details you want to add..."></textarea>
+            </div>
+        </div>
+
+        <button type="submit">Submit Rental Application</button>
+    </form>
+</div>
+
+</body>
+</html>
