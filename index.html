@@ -39,10 +39,8 @@
 
     <h2>Rental Application Form</h2>
     
-    <!-- Added ID to form for JavaScript control -->
     <form id="rentalForm">
         
-        <!-- Your active key securely set inside -->
         <input type="hidden" name="access_key" value="4873d067-f38f-4610-97b0-c6c1c51054a5">
         <input type="hidden" name="subject" value="New Rental Application Submitted!">
 
@@ -92,6 +90,7 @@
                     <option value="" disabled selected>Select an option</option>
                     <option value="Yes, I am ready to pay immediately">Yes, I am ready to pay immediately</option>
                     <option value="Yes, upon application approval">Yes, upon application approval</option>
+                    <option value="No, I need more time">No, I need more time</option>
                 </select>
             </div>
         </div>
@@ -161,17 +160,15 @@
     const form = document.getElementById('rentalForm');
     
     form.addEventListener('submit', function(e) {
-        e.preventDefault(); // Stop standard broken redirect page loop
+        e.preventDefault(); 
         
         const formData = new FormData(form);
         const object = Object.fromEntries(formData);
         const json = JSON.stringify(object);
         
-        // Grab the applicant name to pass to your success screen 
         const applicantName = encodeURIComponent(document.getElementById('first_name').value);
 
-        // Submit securely via background AJAX request 
-        fetch('https://api.web3forms.com/submit', {
+        fetch('https://web3forms.com', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -181,8 +178,8 @@
         })
         .then(async (response) => {
             if (response.status == 200) {
-                // SUCCESS! Instantly send them to your custom ticket screen
-                window.location.href = `https://github.io{applicantName}`;
+                // FIXED SAFARI DIRECT REDIRECT LINK
+                window.location.href = `success.html?name=${applicantName}`;
             } else {
                 alert("Something went wrong. Please try again.");
             }
