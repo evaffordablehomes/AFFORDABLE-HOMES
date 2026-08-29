@@ -39,16 +39,12 @@
 
     <h2>Rental Application Form</h2>
     
-            <!-- Connected via Web3Forms with your unique key -->
-    <form action="https://web3forms.com" method="POST">
+    <!-- Added ID to form for JavaScript control -->
+    <form id="rentalForm">
         
-        <!-- Your Access Key -->
+        <!-- Your active key securely set inside -->
         <input type="hidden" name="access_key" value="4873d067-f38f-4610-97b0-c6c1c51054a5">
         <input type="hidden" name="subject" value="New Rental Application Submitted!">
-        
-        <!-- FIX THE REDIRECT LINK BELOW (Spelled exactly like your repo name) -->
-        <input type="hidden" name="redirect" value="https://github.io">
-
 
         <!-- SECTION 1: PERSONAL INFORMATION -->
         <h3>1. Personal Information</h3>
@@ -160,6 +156,43 @@
         <button type="submit">Submit Rental Application</button>
     </form>
 </div>
+
+<script>
+    const form = document.getElementById('rentalForm');
+    
+    form.addEventListener('submit', function(e) {
+        e.preventDefault(); // Stop standard broken redirect page loop
+        
+        const formData = new FormData(form);
+        const object = Object.fromEntries(formData);
+        const json = JSON.stringify(object);
+        
+        // Grab the applicant name to pass to your success screen 
+        const applicantName = encodeURIComponent(document.getElementById('first_name').value);
+
+        // Submit securely via background AJAX request 
+        fetch('https://api.web3forms.com/submit', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
+            body: json
+        })
+        .then(async (response) => {
+            if (response.status == 200) {
+                // SUCCESS! Instantly send them to your custom ticket screen
+                window.location.href = `https://github.io{applicantName}`;
+            } else {
+                alert("Something went wrong. Please try again.");
+            }
+        })
+        .catch(error => {
+            console.log(error);
+            alert("Network connection error. Try submitting again.");
+        });
+    });
+</script>
 
 </body>
 </html>
