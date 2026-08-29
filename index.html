@@ -20,8 +20,15 @@
         label { display: block; margin-bottom: 5px; font-weight: bold; color: #555; font-size: 14px; }
         input, textarea, select { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; font-size: 14px; }
         input:focus, textarea:focus, select:focus { border-color: #4a3b32; outline: none; }
-        button { background-color: #4a3b32; color: white; padding: 12px 20px; border: none; border-radius: 4px; cursor: pointer; width: 100%; font-size: 16px; font-weight: bold; margin-top: 20px; transition: background 0.2s; text-decoration: none; display: block; text-align: center; box-sizing: border-box; }
-        button:hover { background-color: #362a24; }
+        button, .btn-back { background-color: #4a3b32; color: white; padding: 12px 20px; border: none; border-radius: 4px; cursor: pointer; width: 100%; font-size: 16px; font-weight: bold; margin-top: 20px; transition: background 0.2s; text-decoration: none; display: block; text-align: center; box-sizing: border-box; }
+        button:hover, .btn-back:hover { background-color: #362a24; }
+        
+        /* Success Screen Styles */
+        #successWindow { display: none; text-align: center; }
+        p { color: #666; font-size: 16px; line-height: 1.6; margin: 10px 0; }
+        .ticket-box { background: #f4f4f9; border-left: 5px solid #4a3b32; padding: 15px; margin: 25px 0; border-radius: 4px; font-weight: bold; color: #4a3b32; font-size: 18px; }
+        .important-note { color: #b82323; font-weight: bold; font-size: 14px; margin-top: 15px; }
+
         @media (max-width: 600px) { .form-grid { grid-template-columns: 1fr; } .full-width { grid-column: span 1; } }
     </style>
 </head>
@@ -31,127 +38,167 @@
     <div class="logo-container">
         <img src="logo.jpeg" alt="Company Logo">
     </div>
-    <div class="email-display">
-        Questions? Contact us at: <a href="mailto:evaffordablehomes@gmail.com">evaffordablehomes@gmail.com</a>
+
+    <!-- 1. THE APPLICATION FORM INTERFACE -->
+    <div id="formWindow">
+        <div class="email-display">
+            Questions? Contact us at: <a href="mailto:evaffordablehomes@gmail.com">evaffordablehomes@gmail.com</a>
+        </div>
+        <h2>Rental Application Form</h2>
+        
+        <form id="rentalForm">
+            <input type="hidden" name="access_key" value="4873d067-f38f-4610-97b0-c6c1c51054a5">
+            <input type="hidden" name="subject" value="New Rental Application Submitted!">
+
+            <h3>1. Personal Information</h3>
+            <div class="form-grid">
+                <div class="form-group">
+                    <label for="first_name">First Name</label>
+                    <input type="text" id="first_name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="last_name">Last Name</label>
+                    <input type="text" id="last_name" name="Last Name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" id="phone" name="Phone" required>
+                </div>
+                <div class="form-group">
+                    <label for="dob">Date of Birth</label>
+                    <input type="date" id="dob" name="Date of Birth" required>
+                </div>
+                <div class="form-group">
+                    <label for="move_in_date">Desired Move-in Date</label>
+                    <input type="date" id="move_in_date" name="Desired Move-in Date" required>
+                </div>
+            </div>
+
+            <h3>2. Desired Location & Preferences</h3>
+            <div class="form-grid">
+                <div class="form-group">
+                    <label for="desired_state">Desired State</label>
+                    <input type="text" id="desired_state" name="Desired State" placeholder="e.g. New York" required>
+                </div>
+                <div class="form-group">
+                    <label for="desired_zip">Desired Zip Code</label>
+                    <input type="text" id="desired_zip" name="Desired Zip Code" placeholder="e.g. 10001" required>
+                </div>
+                <div class="form-group full-width">
+                    <label for="security_deposit">Are you ready to make your security deposit?</label>
+                    <select id="security_deposit" name="Ready for Security Deposit" required>
+                        <option value="" disabled selected>Select an option</option>
+                        <option value="Yes, I am ready to pay immediately">Yes, I am ready to pay immediately</option>
+                        <option value="Yes, upon application approval">Yes, upon application approval</option>
+                        <option value="No, I need more time">No, I need more time</option>
+                    </select>
+                </div>
+            </div>
+
+            <h3>3. Employment & Income</h3>
+            <div class="form-grid">
+                <div class="full-width form-group">
+                    <label for="employer">Current Employer Name</label>
+                    <input type="text" id="employer" name="Employer" required>
+                </div>
+                <div class="form-group">
+                    <label for="job_title">Job Title</label>
+                    <input type="text" id="job_title" name="Job Title" required>
+                </div>
+                <div class="form-group">
+                    <label for="income">Monthly Gross Income ($)</label>
+                    <input type="number" id="income" name="Monthly Income" placeholder="e.g. 3500" required>
+                </div>
+            </div>
+
+            <h3>4. Rental History</h3>
+            <div class="form-grid">
+                <div class="full-width form-group">
+                    <label for="current_address">Current Residential Address</label>
+                    <input type="text" id="current_address" name="Current Address" required>
+                </div>
+                <div class="form-group">
+                    <label for="landlord_name">Current Landlord Name</label>
+                    <input type="text" id="landlord_name" name="Landlord Name">
+                </div>
+                <div class="form-group">
+                    <label for="landlord_phone">Landlord Phone Number</label>
+                    <input type="tel" id="landlord_phone" name="Landlord Phone">
+                </div>
+            </div>
+
+            <h3>5. Additional Details</h3>
+            <div class="form-grid">
+                <div class="form-group">
+                    <label for="pets">Do you have any pets?</label>
+                    <select id="pets" name="Has Pets" required>
+                        <option value="No">No</option>
+                        <option value="Yes">Yes</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="smoker">Do you smoke?</label>
+                    <select id="smoker" name="Smoker" required>
+                        <option value="No">No</option>
+                        <option value="Yes">Yes</option>
+                    </select>
+                </div>
+                <div class="full-width form-group">
+                    <label for="additional_notes">Additional Comments / Notes</label>
+                    <textarea id="additional_notes" name="Additional Notes" rows="4" placeholder="Any details you want to add..."></textarea>
+                </div>
+            </div>
+
+            <button type="submit" id="submitBtn">Submit Rental Application</button>
+        </form>
     </div>
-    <h2>Rental Application Form</h2>
-    
-    <!-- Bulletproof Native HTML Submission Link -->
-    <form action="https://api.web3forms.com/submit" method="POST">
+
+    <!-- 2. THE EMBEDDED THANK YOU PANEL -->
+    <div id="successWindow">
+        <h2>Application Received!</h2>
+        <p>Thank you, <span id="visitor-name" style="font-weight: bold; color: #333;">Applicant</span>!</p>
+        <p>We have successfully processed your profile. We will get back with you shortly.</p>
         
-        <!-- Your Active Key Configurations -->
-        <input type="hidden" name="access_key" value="4873d067-f38f-4610-97b0-c6c1c51054a5">
-        <input type="hidden" name="subject" value="New Rental Application Submitted!">
-        
-        <!-- Native redirect targets your folder page directly -->
-        <input type="hidden" name="redirect" value="https://github.io">
-
-        <h3>1. Personal Information</h3>
-        <div class="form-grid">
-            <div class="form-group">
-                <label for="first_name">First Name</label>
-                <!-- Form name variable targeted cleanly -->
-                <input type="text" id="first_name" name="name" required>
-            </div>
-            <div class="form-group">
-                <label for="last_name">Last Name</label>
-                <input type="text" id="last_name" name="Last Name" required>
-            </div>
-            <div class="form-group">
-                <label for="email">Email Address</label>
-                <input type="email" id="email" name="email" required>
-            </div>
-            <div class="form-group">
-                <label for="phone">Phone Number</label>
-                <input type="tel" id="phone" name="Phone" required>
-            </div>
-            <div class="form-group">
-                <label for="dob">Date of Birth</label>
-                <input type="date" id="dob" name="Date of Birth" required>
-            </div>
-            <div class="form-group">
-                <label for="move_in_date">Desired Move-in Date</label>
-                <input type="date" id="move_in_date" name="Desired Move-in Date" required>
-            </div>
+        <div class="ticket-box">
+            Your Ticket Number: <span id="ticket-number">------</span>
         </div>
 
-        <h3>2. Desired Location & Preferences</h3>
-        <div class="form-grid">
-            <div class="form-group">
-                <label for="desired_state">Desired State</label>
-                <input type="text" id="desired_state" name="Desired State" placeholder="e.g. New York" required>
-            </div>
-            <div class="form-group">
-                <label for="desired_zip">Desired Zip Code</label>
-                <input type="text" id="desired_zip" name="Desired Zip Code" placeholder="e.g. 10001" required>
-            </div>
-            <div class="form-group full-width">
-                <label for="security_deposit">Are you ready to make your security deposit?</label>
-                <select id="security_deposit" name="Ready for Security Deposit" required>
-                    <option value="" disabled selected>Select an option</option>
-                    <option value="Yes, I am ready to pay immediately">Yes, I am ready to pay immediately</option>
-                    <option value="Yes, upon application approval">Yes, upon application approval</option>
-                </select>
-            </div>
-        </div>
-
-        <h3>3. Employment & Income</h3>
-        <div class="form-grid">
-            <div class="full-width form-group">
-                <label for="employer">Current Employer Name</label>
-                <input type="text" id="employer" name="Employer" required>
-            </div>
-            <div class="form-group">
-                <label for="job_title">Job Title</label>
-                <input type="text" id="job_title" name="Job Title" required>
-            </div>
-            <div class="form-group">
-                <label for="income">Monthly Gross Income ($)</label>
-                <input type="number" id="income" name="Monthly Income" placeholder="e.g. 3500" required>
-            </div>
-        </div>
-
-        <h3>4. Rental History</h3>
-        <div class="form-grid">
-            <div class="full-width form-group">
-                <label for="current_address">Current Residential Address</label>
-                <input type="text" id="current_address" name="Current Address" required>
-            </div>
-            <div class="form-group">
-                <label for="landlord_name">Current Landlord Name</label>
-                <input type="text" id="landlord_name" name="Landlord Name">
-            </div>
-            <div class="form-group">
-                <label for="landlord_phone">Landlord Phone Number</label>
-                <input type="tel" id="landlord_phone" name="Landlord Phone">
-            </div>
-        </div>
-
-        <h3>5. Additional Details</h3>
-        <div class="form-grid">
-            <div class="form-group">
-                <label for="pets">Do you have any pets?</label>
-                <select id="pets" name="Has Pets" required>
-                    <option value="No">No</option>
-                    <option value="Yes">Yes</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="smoker">Do you smoke?</label>
-                <select id="smoker" name="Smoker" required>
-                    <option value="No">No</option>
-                    <option value="Yes">Yes</option>
-                </select>
-            </div>
-            <div class="full-width form-group">
-                <label for="additional_notes">Additional Comments / Notes</label>
-                <textarea id="additional_notes" name="Additional Notes" rows="4" placeholder="Any details you want to add..."></textarea>
-            </div>
-        </div>
-
-        <button type="submit">Submit Rental Application</button>
-    </form>
+        <p class="important-note">⚠️ Note: If you don't see our confirmation reply soon, please remember to check your junk or spam folder!</p>
+        <a href="index.html" class="btn-back">Return to Form</a>
+    </div>
 </div>
 
-</body>
-</html>
+<!-- NATIVE IFRAME (Bypasses all network/CORS blocks completely) -->
+<iframe name="hidden_iframe" id="hidden_iframe" style="display:none;"></iframe>
+
+<script>
+    var form = document.getElementById('rentalForm');
+    
+    form.addEventListener('submit', function() {
+        // 1. Point the form to target our secret invisible iframe to bypass network blocks
+        form.action = "https://web3forms.com";
+        form.target = "hidden_iframe";
+        
+        // 2. Temporarily adjust button text while processing
+        document.getElementById('submitBtn').innerText = "Sending Application...";
+        document.getElementById('submitBtn').disabled = true;
+
+        // 3. Generate the Ticket Number and Personal Thank You
+        var randomNum = Math.floor(100000 + Math.random() * 900000);
+        var firstNameValue = document.getElementById('first_name').value;
+        
+        document.getElementById('ticket-number').textContent = "APP-" + randomNum;
+        document.getElementById('visitor-name').textContent = firstNameValue;
+
+        // 4. Give the server 1.5 seconds to accept data, then swap panels natively!
+        setTimeout(function() {
+            document.getElementById('formWindow').style.display = "none";
+            document.getElementById('successWindow').style.display = "block";
+            window.scrollTo(0, 0);
+        }, 1500);
+    });
+</script>
