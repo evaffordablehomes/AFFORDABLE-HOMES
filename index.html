@@ -39,22 +39,24 @@
         <img src="logo.jpeg" alt="Company Logo">
     </div>
 
-    <!-- 1. THE APPLICATION FORM INTERFACE -->
+    <!-- 1. APPLICATION FORM WINDOW -->
     <div id="formWindow">
         <div class="email-display">
             Questions? Contact us at: <a href="mailto:evaffordablehomes@gmail.com">evaffordablehomes@gmail.com</a>
         </div>
         <h2>Rental Application Form</h2>
         
-        <form id="rentalForm">
-            <input type="hidden" name="access_key" value="4873d067-f38f-4610-97b0-c6c1c51054a5">
-            <input type="hidden" name="subject" value="New Rental Application Submitted!">
+        <!-- FormSubmit pointing straight to your email address -->
+        <form id="rentalForm" action="https://formsubmit.co" method="POST" target="hidden_iframe">
+            
+            <input type="hidden" name="_captcha" value="false">
+            <input type="hidden" name="_subject" value="New Rental Application Submitted!">
 
             <h3>1. Personal Information</h3>
             <div class="form-grid">
                 <div class="form-group">
                     <label for="first_name">First Name</label>
-                    <input type="text" id="first_name" name="name" required>
+                    <input type="text" id="first_name" name="First Name" required>
                 </div>
                 <div class="form-group">
                     <label for="last_name">Last Name</label>
@@ -62,11 +64,11 @@
                 </div>
                 <div class="form-group">
                     <label for="email">Email Address</label>
-                    <input type="email" id="email" name="email" required>
+                    <input type="email" id="email" name="Email Address" required>
                 </div>
                 <div class="form-group">
                     <label for="phone">Phone Number</label>
-                    <input type="tel" id="phone" name="Phone" required>
+                    <input type="tel" id="phone" name="Phone Number" required>
                 </div>
                 <div class="form-group">
                     <label for="dob">Date of Birth</label>
@@ -102,7 +104,7 @@
             <div class="form-grid">
                 <div class="full-width form-group">
                     <label for="employer">Current Employer Name</label>
-                    <input type="text" id="employer" name="Employer" required>
+                    <input type="text" id="employer" name="Employer Name" required>
                 </div>
                 <div class="form-group">
                     <label for="job_title">Job Title</label>
@@ -171,34 +173,30 @@
     </div>
 </div>
 
-<!-- NATIVE IFRAME (Bypasses all network/CORS blocks completely) -->
+<!-- Invisible iframe target for native forms to bypass CORS/Safari network bugs -->
 <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;"></iframe>
 
 <script>
     var form = document.getElementById('rentalForm');
     
-    form.addEventListener('submit', function(e) {
-        // 1. Let the native HTML form handle the submission data path
-        form.action = "https://web3forms.com";
-        form.target = "hidden_iframe";
-        
-        // 2. Temporarily adjust button text while processing
+    form.addEventListener('submit', function() {
+        // 1. Instantly change button text to avoid double clicking
         document.getElementById('submitBtn').innerText = "Sending Application...";
         document.getElementById('submitBtn').disabled = true;
 
-        // 3. Generate the Ticket Number and Personal Thank You
+        // 2. Generate the Ticket Number and Personal Thank You
         var randomNum = Math.floor(100000 + Math.random() * 900000);
         var firstNameValue = document.getElementById('first_name').value;
         
         document.getElementById('ticket-number').textContent = "APP-" + randomNum;
         document.getElementById('visitor-name').textContent = firstNameValue;
 
-        // 4. Give the server 2 seconds to accept data, then swap panels natively!
+        // 3. Let it process, then flip screens natively on the page 
         setTimeout(function() {
             document.getElementById('formWindow').style.display = "none";
             document.getElementById('successWindow').style.display = "block";
             window.scrollTo(0, 0);
-        }, 2000);
+        }, 1500);
     });
 </script>
 
