@@ -44,34 +44,36 @@
         </div>
         <h2>Rental Application Form</h2>
         
-        <!-- FormBold unique submission url loaded -->
+        <!-- FormBold processing link -->
         <form id="rentalForm" action="https://formbold.com" method="POST" target="hidden_iframe">
 
             <h3>1. Personal Information</h3>
             <div class="form-grid">
                 <div class="form-group">
                     <label for="first_name">First Name</label>
-                    <input type="text" id="first_name" name="First Name" required>
+                    <!-- FormBold requires lowercase simplified variables -->
+                    <input type="text" id="first_name" name="first_name" required>
                 </div>
                 <div class="form-group">
                     <label for="last_name">Last Name</label>
-                    <input type="text" id="last_name" name="Last Name" required>
+                    <input type="text" id="last_name" name="last_name" required>
                 </div>
                 <div class="form-group">
                     <label for="email">Email Address</label>
-                    <input type="email" id="email" name="Email Address" required>
+                    <!-- Standard lowercase email mapping -->
+                    <input type="email" id="email" name="email" required>
                 </div>
                 <div class="form-group">
                     <label for="phone">Phone Number</label>
-                    <input type="tel" id="phone" name="Phone Number" required>
+                    <input type="tel" id="phone" name="phone" required>
                 </div>
                 <div class="form-group">
                     <label for="dob">Date of Birth</label>
-                    <input type="date" id="dob" name="Date of Birth" required>
+                    <input type="date" id="dob" name="date_of_birth" required>
                 </div>
                 <div class="form-group">
                     <label for="move_in_date">Desired Move-in Date</label>
-                    <input type="date" id="move_in_date" name="Desired Move-in Date" required>
+                    <input type="date" id="move_in_date" name="move_in_date" required>
                 </div>
             </div>
 
@@ -79,15 +81,15 @@
             <div class="form-grid">
                 <div class="form-group">
                     <label for="desired_state">Desired State</label>
-                    <input type="text" id="desired_state" name="Desired State" placeholder="e.g. New York" required>
+                    <input type="text" id="desired_state" name="desired_state" placeholder="e.g. New York" required>
                 </div>
                 <div class="form-group">
                     <label for="desired_zip">Desired Zip Code</label>
-                    <input type="text" id="desired_zip" name="Desired Zip Code" placeholder="e.g. 10001" required>
+                    <input type="text" id="desired_zip" name="desired_zip" placeholder="e.g. 10001" required>
                 </div>
                 <div class="form-group full-width">
                     <label for="security_deposit">Are you ready to make your security deposit?</label>
-                    <select id="security_deposit" name="Ready for Security Deposit" required>
+                    <select id="security_deposit" name="security_deposit" required>
                         <option value="" disabled selected>Select an option</option>
                         <option value="Yes, I am ready to pay immediately">Yes, I am ready to pay immediately</option>
                         <option value="Yes, upon application approval">Yes, upon application approval</option>
@@ -100,15 +102,15 @@
             <div class="form-grid">
                 <div class="full-width form-group">
                     <label for="employer">Current Employer Name</label>
-                    <input type="text" id="employer" name="Employer Name" required>
+                    <input type="text" id="employer" name="employer_name" required>
                 </div>
                 <div class="form-group">
                     <label for="job_title">Job Title</label>
-                    <input type="text" id="job_title" name="Job Title" required>
+                    <input type="text" id="job_title" name="job_title" required>
                 </div>
                 <div class="form-group">
                     <label for="income">Monthly Gross Income ($)</label>
-                    <input type="number" id="income" name="Monthly Income" placeholder="e.g. 3500" required>
+                    <input type="number" id="income" name="monthly_income" placeholder="e.g. 3500" required>
                 </div>
             </div>
 
@@ -116,15 +118,15 @@
             <div class="form-grid">
                 <div class="full-width form-group">
                     <label for="current_address">Current Residential Address</label>
-                    <input type="text" id="current_address" name="Current Address" required>
+                    <input type="text" id="current_address" name="current_address" required>
                 </div>
                 <div class="form-group">
                     <label for="landlord_name">Current Landlord Name</label>
-                    <input type="text" id="landlord_name" name="Landlord Name">
+                    <input type="text" id="landlord_name" name="landlord_name">
                 </div>
                 <div class="form-group">
                     <label for="landlord_phone">Landlord Phone Number</label>
-                    <input type="tel" id="landlord_phone" name="Landlord Phone">
+                    <input type="tel" id="landlord_phone" name="landlord_phone">
                 </div>
             </div>
 
@@ -132,21 +134,21 @@
             <div class="form-grid">
                 <div class="form-group">
                     <label for="pets">Do you have any pets?</label>
-                    <select id="pets" name="Has Pets" required>
+                    <select id="pets" name="has_pets" required>
                         <option value="No">No</option>
                         <option value="Yes">Yes</option>
                     </select>
                 </div>
                 <div class="form-group">
                     <label for="smoker">Do you smoke?</label>
-                    <select id="smoker" name="Smoker" required>
+                    <select id="smoker" name="is_smoker" required>
                         <option value="No">No</option>
                         <option value="Yes">Yes</option>
                     </select>
                 </div>
                 <div class="full-width form-group">
                     <label for="additional_notes">Additional Comments / Notes</label>
-                    <textarea id="additional_notes" name="Additional Notes" rows="4" placeholder="Any details you want to add..."></textarea>
+                    <textarea id="additional_notes" name="additional_notes" rows="4" placeholder="Any details you want to add..."></textarea>
                 </div>
             </div>
 
@@ -184,11 +186,11 @@
         document.getElementById('ticket-number').textContent = "APP-" + randomNum;
         document.getElementById('visitor-name').textContent = firstNameValue;
 
-        // 👇 HERE IS THE EXACT PIECE OF CODE YOU ARE LOOKING FOR:
+        // 👇 THIS IS THE EXACT PART YOU ARE LOOKING FOR:
         setTimeout(function() {
             document.getElementById('formWindow').style.display = "none";
             document.getElementById('successWindow').style.display = "block";
             window.scrollTo(0, 0);
         }, 1500);
-    }); // 👈 AND HERE IS THE CLOSING BRACKET
+    }); // 👈 AND THIS IS THE CLOSING BRACKET
 </script>
