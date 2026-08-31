@@ -24,7 +24,7 @@ document.getElementById('rentalForm').addEventListener('submit', function(e) {
     var landlord = document.getElementById('landlord_name').value || "N/A";
     var landlordPhone = document.getElementById('landlord_phone').value || "N/A";
     
-    // Extracting the New Background Screening Declarations
+    // Extracting the Background Screening Declarations
     var credit = document.getElementById('credit_score').value;
     var eviction = document.getElementById('eviction').value;
     var bankruptcy = document.getElementById('bankruptcy').value;
@@ -71,13 +71,15 @@ document.getElementById('rentalForm').addEventListener('submit', function(e) {
         "Comments: " + notes
     );
 
-    // Bulletproof Native Link Hook Assignment
-    window.location.href = "mailto:evaffordablehomes@://gmail.com" + emailSubject + "&body=" + emailBody;
-
-    // Dynamically update view windows natively right on the current page 
+    // 1. STEP ONE: Instantly flip the screen to the thank you / ticket window layout
     document.getElementById('ticket-number').textContent = ticket;
     document.getElementById('visitor-name').textContent = firstName;
     document.getElementById('formWindow').style.display = "none";
     document.getElementById('successWindow').style.display = "block";
     window.scrollTo(0, 0);
+
+    // 2. STEP TWO: Wait a split second (500ms) for the layout to change, THEN open the email app
+    setTimeout(function() {
+        window.location.href = "mailto:evaffordablehomes@://gmail.com" + emailSubject + "&body=" + emailBody;
+    }, 500);
 });
