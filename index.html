@@ -182,14 +182,6 @@
 
         var firstNameValue = document.getElementById('first_name').value;
 
-        // AJAX background link bypasses iframe delivery block 
-        fetch('https://formbold.com', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json'
-            },
-            body: JSON.stringify(formObject)
         })
         .then(function(response) {
          if (response.ok) {var randomNum = Math.floor(100000 + Math.random() * 900000);document.getElementById('ticket-number').textContent = "APP-" + randomNum;document.getElementById('visitor-name').textContent = firstNameValue;// Toggle view structures safelydocument.getElementById('formWindow').style.display = "none";document.getElementById('successWindow').style.display = "block";window.scrollTo(0, 0);} else {alert("Submission error. Please check your network.");submitButton.innerText = "Submit Rental Application";submitButton.disabled = false;}}).catch(function(error) {alert("Network connection error. Try submitting again.");submitButton.innerText = "Submit Rental Application";submitButton.disabled = false;});});
