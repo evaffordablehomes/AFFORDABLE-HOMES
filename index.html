@@ -37,8 +37,11 @@
     </div>
     <h2>Rental Application Form</h2>
     
-    <!-- CHANGE THE LINK BELOW TO YOUR FORMSPREE LINK -->
-    <form action="PASTE_YOUR_FORMSPREE_LINK_HERE" method="POST">
+    <!-- This securely routes the data straight into your email -->
+    <form action="https://formspree.io" method="POST">
+        <!-- Tells the server where to send notifications -->
+        <input type="hidden" name="_to" value="evaffordablehomes@gmail.com">
+        <input type="hidden" name="_subject" value="New Rental Application Submitted!">
 
         <h3>1. Personal Information</h3>
         <div class="form-grid">
