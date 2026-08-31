@@ -1,187 +1,215 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rental Application Form</title>
-    <style>
-        body { font-family: Arial, sans-serif; background-color: #4a3b32; margin: 0; padding: 40px 20px; }
-        .form-container { max-width: 650px; margin: 0 auto; background: #ffffff; padding: 30px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
-        .logo-container { text-align: center; margin-bottom: 15px; }
-        .logo-container img { max-width: 180px; height: auto; }
-        .email-display { text-align: center; color: #666; font-size: 14px; margin-bottom: 25px; }
-        .email-display a { color: #4a3b32; font-weight: bold; text-decoration: none; }
-        .email-display a:hover { text-decoration: underline; }
-        h2 { text-align: center; color: #333333; margin-bottom: 30px; border-bottom: 2px solid #4a3b32; padding-bottom: 10px; }
-        h3 { color: #4a3b32; margin-top: 25px; border-bottom: 1px solid #ddd; padding-bottom: 5px; }
-        .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
-        .full-width { grid-column: span 2; }
-        .form-group { margin-bottom: 15px; }
-        label { display: block; margin-bottom: 5px; font-weight: bold; color: #555; font-size: 14px; }
-        input, textarea, select { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; font-size: 14px; }
-        input:focus, textarea:focus, select:focus { border-color: #4a3b32; outline: none; }
-        button, .btn-back { background-color: #4a3b32; color: white; padding: 12px 20px; border: none; border-radius: 4px; cursor: pointer; width: 100%; font-size: 16px; font-weight: bold; margin-top: 20px; transition: background 0.2s; text-decoration: none; display: block; text-align: center; box-sizing: border-box; }
-        button:hover, .btn-back:hover { background-color: #362a24; }
+<!DOCTYPE html> 
+<html lang="en"> 
+<head> 
+    <meta charset="UTF-8"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <title>Rental Application Form</title> 
+    <style> 
+        body { font-family: Arial, sans-serif; background-color: #4a3b32; margin: 0; padding: 40px 20px; } 
+        .form-container { max-width: 650px; margin: 0 auto; background: #ffffff; padding: 30px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); } 
+        .logo-container { text-align: center; margin-bottom: 15px; } 
+        .logo-container img { max-width: 180px; height: auto; } 
+        .email-display { text-align: center; color: #666; font-size: 14px; margin-bottom: 25px; } 
+        .email-display a { color: #4a3b32; font-weight: bold; text-decoration: none; } 
+        .email-display a:hover { text-decoration: underline; } 
+        h2 { text-align: center; color: #333333; margin-bottom: 30px; border-bottom: 2px solid #4a3b32; padding-bottom: 10px; } 
+        h3 { color: #4a3b32; margin-top: 25px; border-bottom: 1px solid #ddd; padding-bottom: 5px; } 
+        .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; } 
+        .full-width { grid-column: span 2; } 
+        .form-group { margin-bottom: 15px; } 
+        label { display: block; margin-bottom: 5px; font-weight: bold; color: #555; font-size: 14px; } 
+        input, textarea, select { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; font-size: 14px; } 
+        input:focus, textarea:focus, select:focus { border-color: #4a3b32; outline: none; } 
+        button, .btn-back { background-color: #4a3b32; color: white; padding: 12px 20px; border: none; border-radius: 4px; cursor: pointer; width: 100%; font-size: 16px; font-weight: bold; margin-top: 20px; transition: background 0.2s; text-decoration: none; display: block; text-align: center; box-sizing: border-box; } 
+        button:hover, .btn-back:hover { background-color: #362a24; } 
+        #successWindow { display: none; text-align: center; } 
+        p { color: #666; font-size: 16px; line-height: 1.6; margin: 10px 0; } 
+        .ticket-box { background: #f4f4f9; border-left: 5px solid #4a3b32; padding: 15px; margin: 25px 0; border-radius: 4px; font-weight: bold; color: #4a3b32; font-size: 18px; } 
+        .important-note { color: #b82323; font-weight: bold; font-size: 14px; margin-top: 15px; } 
+        @media (max-width: 600px) { .form-grid { grid-template-columns: 1fr; } .full-width { grid-column: span 1; } } 
+    </style> 
+</head> 
+<body> 
+
+<div class="form-container"> 
+    <div class="logo-container"> 
+        <img src="logo.jpeg" alt="Company Logo"> 
+    </div> 
+
+    <!-- APPLICATION FORM WINDOW --> 
+    <div id="formWindow"> 
+        <div class="email-display"> 
+            Questions? Contact us at: <a href="mailto:evaffordablehomes@gmail.com">evaffordablehomes@gmail.com</a> 
+        </div> 
+        <h2>Rental Application Form</h2> 
+        <form id="rentalForm"> 
+            <h3>1. Personal Information</h3> 
+            <div class="form-grid"> 
+                <div class="form-group"> 
+                    <label for="first_name">First Name</label> 
+                    <input type="text" id="first_name" name="first_name" required> 
+                </div> 
+                <div class="form-group"> 
+                    <label for="last_name">Last Name</label> 
+                    <input type="text" id="last_name" name="last_name" required> 
+                </div> 
+                <div class="form-group"> 
+                    <label for="email">Email Address</label> 
+                    <input type="email" id="email" name="email" required> 
+                </div> 
+                <div class="form-group"> 
+                    <label for="phone">Phone Number</label> 
+                    <input type="tel" id="phone" name="phone" required> 
+                </div> 
+                <div class="form-group"> 
+                    <label for="dob">Date of Birth</label> 
+                    <input type="date" id="dob" name="date_of_birth" required> 
+                </div> 
+                <div class="form-group"> 
+                    <label for="move_in_date">Desired Move-in Date</label> 
+                    <input type="date" id="move_in_date" name="move_in_date" required> 
+                </div> 
+            </div> 
+
+            <h3>2. Desired Location & Preferences</h3> 
+            <div class="form-grid"> 
+                <div class="form-group"> 
+                    <label for="desired_state">Desired State</label> 
+                    <input type="text" id="desired_state" name="desired_state" placeholder="e.g. New York" required> 
+                </div> 
+                <div class="form-group"> 
+                    <label for="desired_zip">Desired Zip Code</label> 
+                    <input type="text" id="desired_zip" name="desired_zip" placeholder="e.g. 10001" required> 
+                </div> 
+                <div class="form-group full-width"> 
+                    <label for="security_deposit">Are you ready to make your security deposit?</label> 
+                    <select id="security_deposit" name="security_deposit" required> 
+                        <option value="" disabled selected>Select an option</option> 
+                        <option value="Yes, I am ready to pay immediately">Yes, I am ready to pay immediately</option> 
+                        <option value="Yes, upon application approval">Yes, upon application approval</option> 
+                    </select> 
+                </div> 
+            </div> 
+
+            <h3>3. Employment & Income</h3> 
+            <div class="form-grid"> 
+                <div class="full-width form-group"> 
+                    <label for="employer">Current Employer Name</label> 
+                    <input type="text" id="employer" name="employer_name" required> 
+                </div> 
+                <div class="form-group"> 
+                    <label for="job_title">Job Title</label> 
+                    <input type="text" id="job_title" name="job_title" required> 
+                </div> 
+                <div class="form-group"> 
+                    <label for="income">Monthly Gross Income ($)</label> 
+                    <input type="number" id="income" name="monthly_income" placeholder="e.g. 3500" required> 
+                </div> 
+            </div> 
+
+            <h3>4. Rental History</h3> 
+            <div class="form-grid"> 
+                <div class="full-width form-group"> 
+                    <label for="current_address">Current Residential Address</label> 
+                    <input type="text" id="current_address" name="current_address" required> 
+                </div> 
+                <div class="form-group"> 
+                    <label for="landlord_name">Current Landlord Name</label> 
+                    <input type="text" id="landlord_name" name="landlord_name"> 
+                </div> 
+                <div class="form-group"> 
+                    <label for="landlord_phone">Landlord Phone Number</label> 
+                    <input type="tel" id="landlord_phone" name="landlord_phone"> 
+                </div> 
+            </div> 
+
+            <h3>5. Additional Details</h3> 
+            <div class="form-grid"> 
+                <div class="form-group"> 
+                    <label for="pets">Do you have any pets?</label> 
+                    <select id="pets" name="has_pets" required> 
+                        <option value="No">No</option> 
+                        <option value="Yes">Yes</option> 
+                    </select> 
+                </div> 
+                <div class="form-group"> 
+                    <label for="smoker">Do you smoke?</label> 
+                    <select id="smoker" name="is_smoker" required> 
+                        <option value="No">No</option> 
+                        <option value="Yes">Yes</option> 
+                    </select> 
+                </div> 
+                <div class="full-width form-group"> 
+                    <label for="additional_notes">Additional Comments / Notes</label> 
+                    <textarea id="additional_notes" name="additional_notes" rows="4" placeholder="Any details you want to add..."></textarea> 
+                </div> 
+            </div> 
+            <button type="submit" id="submitBtn">Submit Rental Application</button> 
+        </form> 
+    </div> 
+
+    <!-- THANK YOU WINDOW --> 
+    <div id="successWindow"> 
+        <h2>Application Received!</h2> 
+        <p>Thank you, <span id="visitor-name" style="font-weight: bold; color: #333;">Applicant</span>!</p> 
+        <p>We have successfully processed your profile. We will get back with you shortly.</p> 
+        <div class="ticket-box"> 
+            Your Ticket Number: <span id="ticket-number">------</span> 
+        </div> 
+        <p class="important-note">⚠️ Note: If you don't see our confirmation reply soon, please remember to check your junk or spam folder!</p> 
+        <a href="index.html" class="btn-back">Return to Form</a> 
+    </div> 
+</div> 
+
+<script> 
+    document.getElementById('rentalForm').addEventListener('submit', function(e) { 
+        e.preventDefault(); 
         
-        #successWindow { display: none; text-align: center; }
-        p { color: #666; font-size: 16px; line-height: 1.6; margin: 10px 0; }
-        .ticket-box { background: #f4f4f9; border-left: 5px solid #4a3b32; padding: 15px; margin: 25px 0; border-radius: 4px; font-weight: bold; color: #4a3b32; font-size: 18px; }
-        .important-note { color: #b82323; font-weight: bold; font-size: 14px; margin-top: 15px; }
-        @media (max-width: 600px) { .form-grid { grid-template-columns: 1fr; } .full-width { grid-column: span 1; } }
-    </style>
-</head>
-<body>
+        var submitButton = document.getElementById('submitBtn'); 
+        submitButton.innerText = "Sending Application..."; 
+        submitButton.disabled = true; 
 
-<div class="form-container">
-    <div class="logo-container">
-        <img src="logo.jpeg" alt="Company Logo">
-    </div>
+        var formData = new FormData(this); 
+        var formObject = {}; 
+        formData.forEach(function(value, key) { 
+            formObject[key] = value; 
+        }); 
 
-    <!-- APPLICATION FORM WINDOW -->
-    <div id="formWindow">
-        <div class="email-display">
-            Questions? Contact us at: <a href="mailto:evaffordablehomes@gmail.com">evaffordablehomes@gmail.com</a>
-        </div>
-        <h2>Rental Application Form</h2>
-        
-        <form id="rentalForm">
-            <h3>1. Personal Information</h3>
-            <div class="form-grid">
-                <div class="form-group">
-                    <label for="first_name">First Name</label>
-                    <input type="text" id="first_name" name="first_name" required>
-                </div>
-                <div class="form-group">
-                    <label for="last_name">Last Name</label>
-                    <input type="text" id="last_name" name="last_name" required>
-                </div>
-                <div class="form-group">
-                    <label for="email">Email Address</label>
-                    <input type="email" id="email" name="email" required>
-                </div>
-                <div class="form-group">
-                    <label for="phone">Phone Number</label>
-                    <input type="tel" id="phone" name="phone" required>
-                </div>
-                <div class="form-group">
-                    <label for="dob">Date of Birth</label>
-                    <input type="date" id="dob" name="date_of_birth" required>
-                </div>
-                <div class="form-group">
-                    <label for="move_in_date">Desired Move-in Date</label>
-                    <input type="date" id="move_in_date" name="move_in_date" required>
-                </div>
-            </div>
+        // Injecting Web3Forms key parameters dynamically
+        formObject['access_key'] = '4873d067-f38f-4610-97b0-c6c1c51054a5';
+        formObject['subject'] = 'New Rental Application Submitted!';
 
-            <h3>2. Desired Location & Preferences</h3>
-            <div class="form-grid">
-                <div class="form-group">
-                    <label for="desired_state">Desired State</label>
-                    <input type="text" id="desired_state" name="desired_state" placeholder="e.g. New York" required>
-                </div>
-                <div class="form-group">
-                    <label for="desired_zip">Desired Zip Code</label>
-                    <input type="text" id="desired_zip" name="desired_zip" placeholder="e.g. 10001" required>
-                </div>
-                <div class="form-group full-width">
-                    <label for="security_deposit">Are you ready to make your security deposit?</label>
-                    <select id="security_deposit" name="security_deposit" required>
-                        <option value="" disabled selected>Select an option</option>
-                        <option value="Yes, I am ready to pay immediately">Yes, I am ready to pay immediately</option>
-                        <option value="Yes, upon application approval">Yes, upon application approval</option>
-                    </select>
-                </div>
-            </div>
+        var firstNameValue = document.getElementById('first_name').value; 
 
-            <h3>3. Employment & Income</h3>
-            <div class="form-grid">
-                <div class="full-width form-group">
-                    <label for="employer">Current Employer Name</label>
-                    <input type="text" id="employer" name="employer_name" required>
-                </div>
-                <div class="form-group">
-                    <label for="job_title">Job Title</label>
-                    <input type="text" id="job_title" name="job_title" required>
-                </div>
-                <div class="form-group">
-                    <label for="income">Monthly Gross Income ($)</label>
-                    <input type="number" id="income" name="monthly_income" placeholder="e.g. 3500" required>
-                </div>
-            </div>
-
-            <h3>4. Rental History</h3>
-            <div class="form-grid">
-                <div class="full-width form-group">
-                    <label for="current_address">Current Residential Address</label>
-                    <input type="text" id="current_address" name="current_address" required>
-                </div>
-                <div class="form-group">
-                    <label for="landlord_name">Current Landlord Name</label>
-                    <input type="text" id="landlord_name" name="landlord_name">
-                </div>
-                <div class="form-group">
-                    <label for="landlord_phone">Landlord Phone Number</label>
-                    <input type="tel" id="landlord_phone" name="landlord_phone">
-                </div>
-            </div>
-
-            <h3>5. Additional Details</h3>
-            <div class="form-grid">
-                <div class="form-group">
-                    <label for="pets">Do you have any pets?</label>
-                    <select id="pets" name="has_pets" required>
-                        <option value="No">No</option>
-                        <option value="Yes">Yes</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="smoker">Do you smoke?</label>
-                    <select id="smoker" name="is_smoker" required>
-                        <option value="No">No</option>
-                        <option value="Yes">Yes</option>
-                    </select>
-                </div>
-                <div class="full-width form-group">
-                    <label for="additional_notes">Additional Comments / Notes</label>
-                    <textarea id="additional_notes" name="additional_notes" rows="4" placeholder="Any details you want to add..."></textarea>
-                </div>
-            </div>
-
-            <button type="submit" id="submitBtn">Submit Rental Application</button>
-        </form>
-    </div>
-
-    <!-- THANK YOU WINDOW -->
-    <div id="successWindow">
-        <h2>Application Received!</h2>
-        <p>Thank you, <span id="visitor-name" style="font-weight: bold; color: #333;">Applicant</span>!</p>
-        <p>We have successfully processed your profile. We will get back with you shortly.</p>
-        
-        <div class="ticket-box">
-            Your Ticket Number: <span id="ticket-number">------</span>
-        </div>
-
-        <p class="important-note">⚠️ Note: If you don't see our confirmation reply soon, please remember to check your junk or spam folder!</p>
-        <a href="index.html" class="btn-back">Return to Form</a>
-    </div>
-</div>
-
-<script>
-    document.getElementById('rentalForm').addEventListener('submit', function(e) {
-        e.preventDefault(); // Lock screen natively 
-
-        var submitButton = document.getElementById('submitBtn');
-        submitButton.innerText = "Sending Application...";
-        submitButton.disabled = true;
-
-        var formData = new FormData(this);
-        var formObject = {};
-        formData.forEach(function(value, key) {
-            formObject[key] = value;
-        });
-
-        var firstNameValue = document.getElementById('first_name').value;
-
+        // FIXED ENDPOINT: Added complete secure address prefix
+        fetch('https://web3forms.com', { 
+            method: 'POST', 
+            headers: { 
+                'Content-Type': 'application/json', 
+                'Accept': 'application/json' 
+            }, 
+            body: JSON.stringify(formObject) 
+        }) 
+        .then(function(response) { 
+            if (response.ok) { 
+                var randomNum = Math.floor(100000 + Math.random() * 900000); 
+                document.getElementById('ticket-number').textContent = "APP-" + randomNum; 
+                document.getElementById('visitor-name').textContent = firstNameValue; 
+                
+                // Toggle view structures safely
+                document.getElementById('formWindow').style.display = "none"; 
+                document.getElementById('successWindow').style.display = "block"; 
+                window.scrollTo(0, 0); 
+            } else { 
+                alert("Submission error. Please check your network configuration."); 
+                submitButton.innerText = "Submit Rental Application"; 
+                submitButton.disabled = false; 
+            } 
         })
-        .then(function(response) {
-         if (response.ok) {var randomNum = Math.floor(100000 + Math.random() * 900000);document.getElementById('ticket-number').textContent = "APP-" + randomNum;document.getElementById('visitor-name').textContent = firstNameValue;// Toggle view structures safelydocument.getElementById('formWindow').style.display = "none";document.getElementById('successWindow').style.display = "block";window.scrollTo(0, 0);} else {alert("Submission error. Please check your network.");submitButton.innerText = "Submit Rental Application";submitButton.disabled = false;}}).catch(function(error) {alert("Network connection error. Try submitting again.");submitButton.innerText = "Submit Rental Application";submitButton.disabled = false;});});
+        .catch(function(error) { 
+            alert("Network connection error. Try submitting again."); 
+            submitButton.innerText = "Submit Rental Application"; 
+            submitButton.disabled = false; 
+        }); 
+    }); 
+</script>
